@@ -40,7 +40,7 @@ We will test the accuracy of the generate quantized model before deploying it to
 ```shell
 python evaluate.py
 ```
-<code>evaluate.py</code> reads in the Tensorflow frozen binary graph, runs the inference and reports the least squared  error by comparing the model output with the labels (matrix profile values). 
+<code>evaluate.py</code> reads in the Tensorflow frozen binary graph, runs the inference and reports the mean squared error and mean absolute percentage error by comparing the model output with the labels (matrix profile values). 
 ### 4. Compilation
  Vitis-AI Docker image does not support Ultra96-v2 board, we need to generate the DPU configuration file (Ultra96.dcf) required in the compile step by first downloading the DPU Hardware Handoff file [dpu.hwh](https://www.xilinx.com/bin/public/openDownload?filename=pynqdpu.dpu.ultra96.hwh) and then running the following command
  
