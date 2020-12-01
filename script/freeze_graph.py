@@ -22,17 +22,13 @@ def freeze_session(session, keep_var_names=None, output_names=None, clear_device
    @return The frozen graph definition.
    """
 
-   if (len(sys.argv)) < 2:
-       print("please specify the input model)
-       exit(1)
-
-   model = sys.argv[1]   
+   
    graph = session.graph
 
    with graph.as_default():
        freeze_var_names = list(set(v.op.name for v in tf.global_variables()).difference(keep_var_names or []))
-       
-	   output_names = output_names or []
+
+       output_names = output_names or []
        output_names += [v.op.name for v in tf.global_variables()]
 	   
        input_graph_def = graph.as_graph_def()
@@ -46,8 +42,13 @@ def freeze_session(session, keep_var_names=None, output_names=None, clear_device
 
    return frozen_graph
 
+if (len(sys.argv)) < 2:
+       print("please specify the input model)
+       exit(1)
+model = sys.argv[1]   
+
 keras.backend.set_learning_phase(0)
-loaded_model= keras.models.load_model('model')
+loaded_model= keras.models.load_model(model)
 
 # make list of output and input node names
 input_names=[out.op.name for out in loaded_model.inputs]
