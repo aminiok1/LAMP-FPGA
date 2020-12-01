@@ -76,7 +76,7 @@ for i in range(len(valid_gen):
 
     with tf.Session() as sess:
 	
-	    # run the quantized model and get the output
+	# run the quantized model and get the output
         sess.run(tf.global_variables_initializer())
         sess.run(tf.initializers.local_variables())
         
@@ -84,6 +84,6 @@ for i in range(len(valid_gen):
         
         model_output = logits.eval(feed_dict={input_data: x_test, labels: y_test})[:, 0, :] 
      
-	    # print accuracy metrics
- 	    print(mean_squared_error(model_output, y_test))
+	# print accuracy metrics
+ 	print(mean_squared_error(model_output, y_test))
         print(mean_absolute_percentage_error(model_output, y_test))
