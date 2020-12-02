@@ -59,5 +59,13 @@ vai_c_tensorflow --frozen_pb quantized\deploy_model.pb
 <code>arch.json</code> is located in the files directory. Since, Sigmoid and Global Average Pool layers are not supported by DPU, the command generates four kernels, two of which will be deployed to the FPGA and the other two will be implemented on the host CPU. Xilinx DNNK API has an issue with loading the static libraries that start with the same name, in order to fix this issue, we run the same command one more time setting the output model name to <code>dense_lamp</code>, later, we will use <code>lamp_0.elf</code> and <code>dense_lamp_2.elf</code> when loading the kernels.
 
 ### 5. Running inference
-Now, we can run the models on board by executing <code>lamp_dpu.ipynb</code>. The notebook takes a time series dataset as input and writes the predictions in <code>predict.txt</code> file.
+First we need to install dpu-pynq on the Ultra96 board. Open a terminal and run 
+```shell
+git clone --recursive --shallow-submodules https://github.com/Xilinx/DPU-PYNQ
+cd DPU-PYNQ/upgrade
+make
+
+pip3 install pynq-dpu
+```
+The build process might take up to an hour. After that, we can run the models on board by executing <code>lamp_dpu.ipynb</code>. The notebook takes a time series dataset as input and writes the predictions in <code>predict.txt</code> file.
 
