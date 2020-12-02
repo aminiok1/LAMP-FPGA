@@ -33,9 +33,9 @@ vai_q_tensorflow quantize
                  --input_shapes ?,256,1,32 
                  --calib_iter 32
 ```
-<code>frozen_graph.pb</code> is the frozen model generated in the previous step, <code>input_func</code> is the python file that generates the input data for quantizer (since there is no backpropagation step here, the unlabeled dataset is sufficient), and <code>calib_iter</code> is the number of iterations for calibrating the activations, we noticed that values larger than 32 do not increase the quantizer accuracy by a lot.
+<code>frozen_graph.pb</code> is the frozen model generated in the previous step, <code>input_func</code> is the python file that generates the input data for quantizer (since there is no backpropagation step here, the unlabeled dataset is sufficient), and <code>calib_iter</code> is the number of iterations for calibrating the activations, we noticed that values larger than 32 do not increase the quantizer accuracy by a large degree.
 ### 3. Evaluation
-We will test the accuracy of the generate quantized model before deploying it to the FPGA. 
+We will test the accuracy of the generated quantized model before deploying it to the FPGA. 
 
 ```shell
 python evaluate.py
